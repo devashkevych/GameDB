@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 import App from './App.jsx'
-import TopG from './components/topg/topg.jsx'
+import TopG from './components/TopG/TopG.jsx'
 import Home from './components/Home/Home.jsx'
 import NotFound from './components/NotFound/NotFound.jsx'
 

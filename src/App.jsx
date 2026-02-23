@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { NavLink, Link, Outlet } from 'react-router-dom'
 import './App.css'
 import { auth } from './components/Authorization/Authorization.jsx'
-import { top10 } from './components/topg/topg.jsx'
+import { top10 } from './components/TopG/TopG.jsx'
 
 function App() {
 
