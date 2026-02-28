@@ -5,17 +5,39 @@ import GameCard from "../GameCard/GameCard";
 export default  function TopG() {
 
     const [games, setGames] = useState([])
+    const [loading, setLoading] = useState(false)
+    const [error, setError] = useState(null)
+    const [retry, setRetry] = useState(false)
 
     useEffect(() => {
+        setError(null)
+        setLoading(true);
         const top10 = async () => {
-            const response = await fetch('/api/games')
-            const data = await response.json()
+            try {
+                const response = await fetch('/api/games')
+                if (response.ok) {
+                    const data = await response.json()
+                    setGames(data.games)
+                } else {
+                    throw new Error('something went wrong...try again')
+                }
+                
+            } catch (err) {
+                setError(err.message)
+            } finally {
+                setLoading(false)
+            }
 
-            setGames(data.games)
         }
 
         top10()
-}, [])
+    }, [retry])
+
+    if(loading) return <h3>Loading...</h3>
+    if(error) return <div>
+        <h3>Error: {error}</h3>
+        <button onClick={() => setRetry(r => !r)}>Retry</button>
+    </div>
 
     return (
         <div>
@@ -23,7 +45,7 @@ export default  function TopG() {
             <Link to='/'>Back</Link>
             <ul>
                 {games.map( g => (
-                    <li key={g.id}><GameCard game={g}/></li>
+                    <Link key={g.id} to={`/topg/${g.id}`} state={{ game: g }}><li ><GameCard game={g}/></li></Link>
                 ))}
             </ul>
         </div>

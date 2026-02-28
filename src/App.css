@@ -16,11 +16,6 @@ html, body, #root {
   min-height: 100vh;
   margin: 0 auto;
   padding: 0 20px;
-  border: 3px solid red;
-}
-
-.header {
-  border: 3px solid red;
 }
 
 nav {
@@ -29,6 +24,5 @@ nav {
 }
 
 .content {
-  border: 3px solid red;
   flex: 1;
 }

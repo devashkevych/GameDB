@@ -13,7 +13,7 @@ export default async function handler(req, res) {
             'Authorization': `Bearer ${data.access_token}`,
             'Content-Type': 'application/json',
         },
-        body: 'fields name, rating; limit 10; sort rating desc;'
+        body: 'fields name, rating, cover.url; limit 10; sort rating desc;'
     })
 
     const games = await gamesRaw.json()
