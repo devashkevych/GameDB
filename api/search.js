@@ -1,4 +1,9 @@
 export default async function handler(req, res) {
+    const rawQ = req.query.q
+    const cleanQ = rawQ.trim().replace(/"/g, '').replace(/;/g, '')
+
+    console.log(rawQ, cleanQ)
+
     const raw = await fetch(`https://id.twitch.tv/oauth2/token?client_id=${process.env.CLIENT_ID}&client_secret=${process.env.CLIENT_SECRET}&grant_type=client_credentials`, {
         method: 'POST'
     })
@@ -11,9 +16,9 @@ export default async function handler(req, res) {
         headers: {
             'Client-ID': `${process.env.CLIENT_ID}`,
             'Authorization': `Bearer ${data.access_token}`,
-            'Content-Type': 'text/plain',
+            'Content-Type': 'application/json',
         },
-        body: `fields name, rating, cover.url; limit 10; sort rating desc;`
+        body: `search "${cleanQ}"; fields name, rating, cover.url; limit 10;`
     })
 
     const games = await gamesRaw.json()
@@ -21,5 +26,3 @@ export default async function handler(req, res) {
 
     return res.status(200).json({ games })
 }
-
-

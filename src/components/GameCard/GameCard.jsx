@@ -5,7 +5,7 @@ export default function GameCard({ game }) {
         <div>
             <h3>{game.name}</h3>
             <p>{rating !== null && rating !== undefined ? Number(game.rating).toFixed(1) : 'N/A'}</p>
-            <img src={game.cover.url ? game.cover.url : 'No image'} alt="" />
+            {game.cover?.url ? (<img src={game.cover.url} alt="" />) : <div>No image</div>}
         </div>
     )
 }

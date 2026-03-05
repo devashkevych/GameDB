@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import GameCard from "../GameCard/GameCard";
 
-export default  function TopG() {
+export default function TopG() {
 
     const [games, setGames] = useState([])
     const [loading, setLoading] = useState(false)
@@ -19,7 +19,7 @@ export default  function TopG() {
                     const data = await response.json()
                     setGames(data.games)
                 } else {
-                    throw new Error('something went wrong...try again')
+                    throw new Error('Something went wrong...try again')
                 }
                 
             } catch (err) {
