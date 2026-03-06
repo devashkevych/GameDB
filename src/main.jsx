@@ -18,6 +18,7 @@ createRoot(root).render(
       <Routes>
         <Route path='/' element={<App />}>
           <Route index element={<Home />} />
+          <Route path='/:id' element={<GameDetails />}/> 
           <Route path='/topg' element={<TopG />} />
           <Route path='/topg/:id' element={<GameDetails />}/> 
           <Route path='*' element={<NotFound />} />

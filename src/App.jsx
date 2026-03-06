@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { NavLink, Link, Outlet } from 'react-router-dom'
 import './App.css'
-// import { top10 } from './components/TopG/TopG.jsx'
 
 function App() {
 
