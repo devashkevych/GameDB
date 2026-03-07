@@ -1,25 +1,24 @@
-import { useState } from 'react'
-import { NavLink, Link, Outlet } from 'react-router-dom'
-import './App.css'
+import { useState } from "react";
+import { NavLink, Link, Outlet } from "react-router-dom";
+import "./App.css";
 
 function App() {
-
   return (
     <>
-      <div className='App'> 
-        <div className='header'>
+      <div className="App">
+        <div className="header">
           <nav>
-            <NavLink to='/'>GameDB</NavLink>
-            <Link to='/topg'>Top 100 Games</Link>
+            <NavLink to="/">GameDB</NavLink>
+            <NavLink to="/topg">Top 100 Games</NavLink>
+            <NavLink to="/favorites">Favorites</NavLink>
           </nav>
         </div>
-
-        <div className='content'>
+        <div className="content">
           <Outlet />
         </div>
       </div>
     </>
-  )
+  );
 }
 
-export default App
+export default App;

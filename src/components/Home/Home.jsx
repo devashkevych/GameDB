@@ -1,10 +1,10 @@
-import Search from "../Search/Search"
+import Search from "../Search/Search";
 
 export default function Home() {
-    return (
-        <>
-        <h1>Home Page</h1>
-        {<Search />}
-        </>
-    )
+  return (
+    <>
+      <h1>Home Page</h1>
+      {<Search />}
+    </>
+  );
 }
