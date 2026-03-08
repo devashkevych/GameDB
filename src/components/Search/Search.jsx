@@ -10,7 +10,7 @@ export default function Search() {
   const [error, setError] = useState(null);
   const [empty, setEmpty] = useState(false);
   const [minLength, setMinLength] = useState(false);
-  const {toggleFavorites, isFavorite} = useFavorites();
+  const { toggleFavorites, isFavorite } = useFavorites();
 
   useEffect(() => {
     const controller = new AbortController();
@@ -88,7 +88,7 @@ export default function Search() {
           !empty &&
           results.map((g) => (
             <li key={g.id} style={{ listStyleType: "none" }}>
-              <Link to={`/${g.id}`} state={{ game: g }}>
+              <Link to={`/games/${g.id}`}>
                 <GameCard game={g} />
               </Link>
               <button
@@ -97,8 +97,8 @@ export default function Search() {
                 }}
               >
                 {isFavorite(g.id)
-                  ? "Remove to Favorites"
-                  : "Add from Favorites"}
+                  ? "Remove from Favorites"
+                  : "Add to Favorites"}
               </button>
             </li>
           ))}

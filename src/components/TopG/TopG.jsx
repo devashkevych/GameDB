@@ -32,10 +32,6 @@ export default function TopG() {
     top10();
   }, [retry]);
 
-  useEffect(() => {
-    console.log(favorites);
-  }, [favorites]);
-
   if (loading) return <h3>Loading...</h3>;
   if (error)
     return (
@@ -52,7 +48,7 @@ export default function TopG() {
       <ul>
         {games.map((g) => (
           <li key={g.id}>
-            <Link to={`/topg/${g.id}`} state={{ game: g }}>
+            <Link to={`/games/${g.id}`}>
               <GameCard game={g} />
             </Link>
             <button
@@ -61,8 +57,8 @@ export default function TopG() {
               }}
             >
               {isFavorite(g.id)
-                ? "Remove to Favorites"
-                : "Add from Favorites"}
+                ? "Remove from Favorites"
+                : "Add to Favorites"}
             </button>
           </li>
         ))}

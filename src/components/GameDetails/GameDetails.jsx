@@ -1,39 +1,64 @@
-import { useLocation } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useFavorites } from "../../contexts/FavoritesContext";
+import { useParams } from "react-router-dom";
 
 export default function GameDetails() {
-  const { state } = useLocation();
-  const { toggleFavorites, isFavorite } = useFavorites();
-  const g = state?.game;
-  const rating = g.rating;
+  let params = useParams();
+  const { id } = params;
 
-  if (!g) {
-    return (
-      <div>
-        <h2>No data available</h2>
-        <p>Reloaded page or direct access denied.</p>
-      </div>
-    );
-  }
+  const [g, setG] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+
+  const { toggleFavorites, isFavorite } = useFavorites();
+
+  useEffect(() => {
+    setError(null);
+    setLoading(true);
+
+    const fetchingGame = async () => {
+      try {
+        const response = await fetch(`/api/gamedetails?q=${id}`);
+        const data = await response.json();
+
+        if (!response.ok) throw new Error("Fetching error occured...");
+
+        setG(data[0] ?? null);
+      } catch (e) {
+        setError(e.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchingGame();
+  }, [id]);
 
   return (
     <div>
-      <h1>{g.name}</h1>
-      <h3>{rating !== null && rating !== undefined ? rating : "N/A"}</h3>
-      <p>{g.id}</p>
-      {g.cover?.url ? (
-        <img src={g.cover.url} alt="" />
-      ) : (
-        <div>No image</div>
+      {loading && <p>Loading...</p>}
+      {!loading && !g && <p>No game found</p>}
+      {!loading && g && (
+        <div>
+          <h1>GameID: {id}</h1>
+          <h1>{g.name}</h1>
+          <h3>
+            {g.rating !== null && g.rating !== undefined ? g.rating : "N/A"}
+          </h3>
+          {g.cover?.url ? (
+            <img src={g.cover.url} alt="" />
+          ) : (
+            <div>No image</div>
+          )}
+          <button
+            onClick={() => {
+              toggleFavorites(g);
+            }}
+          >
+            {isFavorite(g.id) ? "Remove from Favorites" : "Add to Favorites"}
+          </button>
+        </div>
       )}
-      <button
-        onClick={() => {
-          toggleFavorites(g);
-        }}
-      >
-        {isFavorite(g.id) ? "Remove to Favorites" : "Add from Favorites"}
-      </button>
     </div>
   );
 }

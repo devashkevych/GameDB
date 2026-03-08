@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { NavLink, Link, Outlet } from "react-router-dom";
 import "./App.css";
 
