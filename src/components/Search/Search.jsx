@@ -88,18 +88,7 @@ export default function Search() {
           !empty &&
           results.map((g) => (
             <li key={g.id} style={{ listStyleType: "none" }}>
-              <Link to={`/games/${g.id}`}>
-                <GameCard game={g} />
-              </Link>
-              <button
-                onClick={() => {
-                  toggleFavorites(g);
-                }}
-              >
-                {isFavorite(g.id)
-                  ? "Remove from Favorites"
-                  : "Add to Favorites"}
-              </button>
+              <GameCard game={g} />
             </li>
           ))}
       </ul>

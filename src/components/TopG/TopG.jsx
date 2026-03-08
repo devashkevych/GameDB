@@ -48,18 +48,7 @@ export default function TopG() {
       <ul>
         {games.map((g) => (
           <li key={g.id}>
-            <Link to={`/games/${g.id}`}>
-              <GameCard game={g} />
-            </Link>
-            <button
-              onClick={() => {
-                toggleFavorites(g);
-              }}
-            >
-              {isFavorite(g.id)
-                ? "Remove from Favorites"
-                : "Add to Favorites"}
-            </button>
+            <GameCard game={g} />
           </li>
         ))}
       </ul>
