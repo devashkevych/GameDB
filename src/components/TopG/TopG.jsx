@@ -36,7 +36,7 @@ export default function TopG() {
           Top Games
         </p>
         <h1 className="text-4xl font-bold tracking-tight sm:text-4xl">
-          Explore best games of the best decade
+          Explore best games of the last decade
         </h1>
         {loading && (
           <h3 className="rounded-2xl p-2 text-zinc-300">Loading...</h3>

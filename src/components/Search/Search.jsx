@@ -79,7 +79,7 @@ export default function Search() {
             setSearch(e.target.value);
           }}
           value={search}
-          placeholder="Try GTA 6, Elder Ring, RDR 2..."
+          placeholder="Try GTA 6, Elden Ring, RDR 2..."
           className="w-full rounded-xl border border-zinc-700 bg-zinc-950 px-4 py-3 text-zinc-100 outline-none transition placeholder:text-zinc-500 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20"
         />
 
