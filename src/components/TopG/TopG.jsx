@@ -1,6 +1,4 @@
-import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { useFavorites } from "../../contexts/FavoritesContext";
 import GameCard from "../GameCard/GameCard";
 
 export default function TopG() {
@@ -8,7 +6,6 @@ export default function TopG() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [retry, setRetry] = useState(false);
-  const { favorites, toggleFavorites, isFavorite } = useFavorites();
 
   useEffect(() => {
     setError(null);
@@ -20,7 +17,7 @@ export default function TopG() {
           const data = await response.json();
           setGames(data.games);
         } else {
-          throw new Error("Something went wrong...try again");
+          throw new Error("Something went wrong...");
         }
       } catch (err) {
         setError(err.message);
@@ -32,22 +29,33 @@ export default function TopG() {
     top10();
   }, [retry]);
 
-  if (loading) return <h3>Loading...</h3>;
-  if (error)
-    return (
-      <div>
-        <h3>Error: {error}</h3>
-        <button onClick={() => setRetry((r) => !r)}>Retry</button>
-      </div>
-    );
-
   return (
     <div>
-      <h1>TopG</h1>
-      <Link to="/">Back</Link>
-      <ul>
+      <div className="space-y-3">
+        <p className="text-sm font-medium uppercase tracking-[0.2em] text-indigo-400">
+          Top Games
+        </p>
+        <h1 className="text-4xl font-bold tracking-tight sm:text-4xl">
+          Explore best games of the last decade
+        </h1>
+        {loading && (
+          <h3 className="rounded-2xl p-2 text-zinc-300">Loading...</h3>
+        )}
+      </div>
+      {error && (
+        <div>
+          <h3 className="rounded-2xl p-2 text-rose-300">Error: {error}</h3>
+          <button
+            className="text-zinc-300 border rounded-xl px-4 py-2  transition border-indigo-400 text-sm font-medium hover:text-white hover:bg-indigo-600/50 hover:border-indigo-500"
+            onClick={() => setRetry((r) => !r)}
+          >
+            Retry
+          </button>
+        </div>
+      )}
+      <ul className="mt-12 grid grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4">
         {games.map((g) => (
-          <li key={g.id}>
+          <li className="h-full" key={g.id}>
             <GameCard game={g} />
           </li>
         ))}

@@ -15,11 +15,11 @@ export default async function handler(req, res) {
       Authorization: `Bearer ${data.access_token}`,
       "Content-Type": "application/json",
     },
-    body: `fields name, rating, cover.url; where id = ${req.query.q};`,
+    body: `fields name, rating, cover.url, storyline, first_release_date, genres.name, platforms.name; where id = ${req.query.q};`,
   });
-  
-  const game = await gameRaw.json();
-  console.log(game)
 
-  return res.status(200).json(game)
+  const game = await gameRaw.json();
+  console.log(game);
+
+  return res.status(200).json(game);
 }
