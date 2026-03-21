@@ -15,7 +15,7 @@ export default async function handler(req, res) {
       Authorization: `Bearer ${data.access_token}`,
       "Content-Type": "application/json",
     },
-    body: `fields name, rating, cover.url, storyline, first_release_date, genres.name, platforms.name; where id = ${req.query.q};`,
+    body: `fields name, rating, cover.url, storyline, first_release_date, genres.name, platforms.name, similar_games; where id = ${req.query.q};`,
   });
 
   const game = await gameRaw.json();

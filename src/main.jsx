@@ -5,10 +5,10 @@ import { FavoritesProvider } from "./contexts/FavoritesContext.jsx";
 
 import App from "./App.jsx";
 import TopG from "./components/TopG/TopG.jsx";
-import GameDetails from "./components/GameDetails/GameDetails.jsx";
 import Home from "./components/Home/Home.jsx";
 import Favorites from "./components/Favorites/Favorites.jsx";
 import NotFound from "./components/NotFound/NotFound.jsx";
+import { GameDetailsWrapper } from "./components/GameDetailsWrapper/GameDetailsWrapper.jsx";
 
 import "./index.css";
 
@@ -21,9 +21,9 @@ createRoot(root).render(
         <Routes>
           <Route path="/" element={<App />}>
             <Route index element={<Home />} />
-            <Route path="/games/:id" element={<GameDetails />} />
+            <Route path="/games/:id" element={<GameDetailsWrapper />} />
             <Route path="/topg" element={<TopG />} />
-            <Route path="/favorites" element={<Favorites />}/>
+            <Route path="/favorites" element={<Favorites />} />
             <Route path="*" element={<NotFound />} />
           </Route>
         </Routes>

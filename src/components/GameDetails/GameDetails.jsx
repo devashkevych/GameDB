@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { useFavorites } from "../../contexts/FavoritesContext";
 import { useParams } from "react-router-dom";
+import { useSimilarGames } from "../../hooks/SimilarGamesHook";
+import { SimilarGames } from "../SimilarGames/SimilarGames";
 
 export default function GameDetails() {
   let params = useParams();
@@ -10,9 +12,13 @@ export default function GameDetails() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
+  const [ids, setIds] = useState([]);
+
   const [collapsed, setCollapsed] = useState(true);
 
   const { toggleFavorites, isFavorite } = useFavorites();
+
+  const { similarGames, similarError, similarLoading } = useSimilarGames(ids);
 
   const toggleCollapse = () => {
     setCollapsed(!collapsed);
@@ -42,6 +48,10 @@ export default function GameDetails() {
     };
     fetchingGame();
   }, [id]);
+
+  useEffect(() => {
+    if (g?.similar_games?.length) setIds(g?.similar_games.slice(0, 3));
+  }, [g]);
 
   return (
     <div className="mx-auto max-w-5xl p-6">
@@ -161,6 +171,24 @@ export default function GameDetails() {
                     {collapsed ? "Show more" : "Show less"}
                   </button>
                 </span>
+              </div>
+            )}
+          </div>
+          <div className="h-px bg-zinc-700 my-4"></div>
+          <div className="flex flex-wrap gap-x-4 gap-y-2">
+            {/*Similar games container*/}
+            {similarLoading && <p className="text-zinc-400">Loading...</p>}
+            {!similarLoading && !similarGames.length && (
+              <p className="text-zinc-400">No similar games found</p>
+            )}
+            {!similarLoading && !similarError && similarGames.length > 0 && (
+              <div>
+                <h2 className="text-xl font-semibold mb-2">You may like</h2>
+                <div className="flex flex-wrap justify-center gap-4 mt-4">
+                  {similarGames.map((similarGame) => (
+                    <SimilarGames key={similarGame.id} game={similarGame} />
+                  ))}
+                </div>
               </div>
             )}
           </div>
