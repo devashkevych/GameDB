@@ -28,7 +28,7 @@ export default function GameCard({ game }) {
             </h3>
             <span className="hidden sm:inline-flex sm:text-md text-zinc-400">
               {game.rating !== null && game.rating !== undefined
-                ? Number(game.rating).toFixed(1)
+                ? Math.round(game.rating) / 10
                 : "N/A"}
             </span>
           </div>
