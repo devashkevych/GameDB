@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import { useFavorites } from "../../contexts/FavoritesContext";
 import GameCard from "../GameCard/GameCard";
 
