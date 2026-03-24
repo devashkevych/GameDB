@@ -1,25 +1,29 @@
 export default async function handler(req, res) {
-  const raw = await fetch(
-    `https://id.twitch.tv/oauth2/token?client_id=${process.env.CLIENT_ID}&client_secret=${process.env.CLIENT_SECRET}&grant_type=client_credentials`,
-    {
+  try {
+
+    const raw = await fetch(
+      `https://id.twitch.tv/oauth2/token?client_id=${process.env.CLIENT_ID}&client_secret=${process.env.CLIENT_SECRET}&grant_type=client_credentials`,
+      {
+        method: "POST",
+      },
+    );
+    
+    const data = await raw.json();
+    
+    const gameRaw = await fetch("https://api.igdb.com/v4/games", {
       method: "POST",
-    },
-  );
-
-  const data = await raw.json();
-
-  const gameRaw = await fetch("https://api.igdb.com/v4/games", {
-    method: "POST",
-    headers: {
-      "Client-ID": `${process.env.CLIENT_ID}`,
-      Authorization: `Bearer ${data.access_token}`,
-      "Content-Type": "application/json",
-    },
-    body: `fields name, rating, cover.url, storyline, first_release_date, genres.name, platforms.name, similar_games; where id = ${req.query.q};`,
-  });
-
-  const game = await gameRaw.json();
-  console.log(game);
-
-  return res.status(200).json(game);
+      headers: {
+        "Client-ID": `${process.env.CLIENT_ID}`,
+        Authorization: `Bearer ${data.access_token}`,
+        "Content-Type": "application/json",
+      },
+      body: `fields name, rating, cover.url, storyline, first_release_date, genres.name, platforms.name, similar_games; where id = ${req.query.q};`,
+    });
+    
+    const game = await gameRaw.json();
+    
+    return res.status(200).json(game);
+  } catch (e) {
+    return res.status(500).json({ error:e.message })
+  }
 }

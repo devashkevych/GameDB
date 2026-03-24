@@ -12,7 +12,7 @@ export const SimilarGames = ({ game }) => {
               className="w-full rounded-lg object-cover"
             />
           ) : (
-            <div className="flex h-[400px] items-center justify-center bg-zinc-800 rounder-lg">
+            <div className="flex h-72 items-center justify-center bg-zinc-800 rounded-lg">
               No image
             </div>
           )}

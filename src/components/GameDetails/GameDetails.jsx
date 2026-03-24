@@ -72,7 +72,7 @@ export default function GameDetails() {
                   className="w-full rounded-lg object-cover"
                 />
               ) : (
-                <div className="flex h-[400px] items-center justify-center bg-zinc-800 rounder-lg">
+                <div className="flex h-72 items-center justify-center bg-zinc-800 rounded-lg">
                   No image
                 </div>
               )}
@@ -180,6 +180,9 @@ export default function GameDetails() {
             {similarLoading && <p className="text-zinc-400">Loading...</p>}
             {!similarLoading && !similarGames.length && (
               <p className="text-zinc-400">No similar games found</p>
+            )}
+            {!similarLoading && similarError && (
+              <p>{similarError}</p>
             )}
             {!similarLoading && !similarError && similarGames.length > 0 && (
               <div>
