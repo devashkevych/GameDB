@@ -58,6 +58,18 @@ npm run build
 
 ---
 
+## Testing
+This project includes 5 manual test cases covering core application features:
+- Search functionality 
+- Top Games page behavior
+- Favorites management (add/remove)
+- Similar Games section
+
+Test cases are available in:
+`docs/tests`
+
+---
+
 ## Links
 
 - Author: Roman Ivashkevych
