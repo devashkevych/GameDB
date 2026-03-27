@@ -1,0 +1,28 @@
+### ID: TC-05
+
+---
+
+### Title: 
+Similar games are updated after navigating to another game
+
+---
+
+### Environment:
+GameDB PC | **bd7771b** | Google Chrome
+
+---
+
+### Repro Steps:
+1. Navigate to Top Games > select any game (Game A).
+2. Navigate to another Game (Game B) via You may like section.
+3. Observe You may like section.
+
+---
+
+### Observed result: 
+Similar games from Game A are not displayed, only similar games related to Game B are shown.
+
+---
+
+### Expected result:
+User sees similar games from Game B, there are no similar games from Game A displayed.
